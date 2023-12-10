@@ -1,0 +1,8 @@
+.main_section {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.content_container {
+    background-color: #f2f4f6;
+}

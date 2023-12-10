@@ -1,0 +1,48 @@
+table, th, td {
+    border-bottom: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f4f6;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+/* action buttons styling */
+.action_buttons_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    border: none;
+}
+
+.action_button {
+    padding: 5px 0;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.btn_view {
+    background-color: #17E83A;
+}
+
+.btn_edit {
+    background-color: #2188de;
+}
+
+.btn_delete {
+    background-color: #DF2A20;
+}
