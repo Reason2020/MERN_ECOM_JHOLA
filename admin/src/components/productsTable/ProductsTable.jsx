@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProductsTable.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { deleteProductById } from '../../api/products';
 import { format } from 'date-fns';
 
@@ -59,7 +59,7 @@ const ProductsTable = ({ data, setData }) => {
                                 View
                             </button>
                             <button className='action_button btn_edit'>
-                                Edit
+                                <Link to={`/products/${item._id}/edit`} >Edit</Link>
                             </button>
                             <button 
                                 className='action_button btn_delete'

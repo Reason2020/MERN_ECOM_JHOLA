@@ -14,6 +14,7 @@ import Orders from './pages/orders/Orders.jsx';
 import Products from './pages/products/Products.jsx';
 import ProductDetails from './pages/productDetails/ProductDetails.jsx';
 import AddNewProduct from './pages/addNewProduct/AddNewProduct.jsx';
+import EditProduct from './pages/editProduct/EditProduct.jsx';
 
 //layout that exists for the whole app
 const Layout = () => {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: '/products/new',
         element: <AddNewProduct />
+      },
+      {
+        path: '/products/:productId/edit',
+        element: <EditProduct />
       },
       {
         path: '*',

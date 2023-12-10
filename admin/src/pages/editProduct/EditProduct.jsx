@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import './AddNewProduct.css';
+import './EditProduct.css';
 import SubHeader from '../../components/subheader/SubHeader';
 import ProductForm from '../../components/productForm/ProductForm';
 import Toast from '../../components/toasts/Toast';
+import { useParams } from 'react-router-dom';
+import { fetchProductById } from '../../api/products';
 
-const AddNewProduct = () => {
+const EditProduct = () => {
   const [ errorMessage, setErrorMessage ] = useState("");
   const [ successMessage, setSuccessMessage ] = useState("");
   const [ showToast, setShowToast ] = useState(false);
+  const [ product, setProduct ] = useState(null);
+
+  const { productId } = useParams();
+
+  useEffect(() => {
+    const getProductById = async () => {
+      const response = await fetchProductById(productId);
+      console.log("Response: ", response);
+      setProduct(response.product);
+    }
+    getProductById();
+  }, []);
 
   useEffect(() => {
     setShowToast(true);
@@ -19,18 +33,19 @@ const AddNewProduct = () => {
   return (
     <div className="container">
         <SubHeader 
-          title='Add New Product' 
+          title='Edit Product' 
           route='/products'
         />
-        <ProductForm 
-          addNewProduct={true}
-          name=""
-          description=""
-          price=""
-          imageUrl=""
-          setErrorMessage={setErrorMessage}
-          setSuccessMessage={setSuccessMessage}
-        />
+        {product && (
+          <ProductForm 
+            addNewProduct={false}
+            name={product?.name}
+            description={product?.description}
+            price={product?.price}
+            setErrorMessage={setErrorMessage}
+            setSuccessMessage={setSuccessMessage}
+          />
+        )}
         {
           showToast && (
             <Toast 
@@ -43,4 +58,4 @@ const AddNewProduct = () => {
   )
 }
 
-export default AddNewProduct
+export default EditProduct
