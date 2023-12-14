@@ -4,8 +4,31 @@ import { Link, useNavigate } from 'react-router-dom';
 import { deleteProductById } from '../../api/products';
 import { format } from 'date-fns';
 
-const ProductsTable = ({ data, setData }) => {
+const ProductsTable = ({ data, setData, currentPageNumber, totalPages }) => {
+    const [ dataByPageNumber, setDataByPageNumber ] = useState([]);
     const navigate = useNavigate();
+
+    //get data by page number
+    useEffect(() => {
+        const dataByPages = getDataByPageNumber();
+        setDataByPageNumber(dataByPages);
+    }, [ currentPageNumber ])
+
+    const getDataByPageNumber = () => {
+        const allData = data;
+        let pagedData = [];
+        const startIndex = 10 * (currentPageNumber - 1) + 1;
+        const endIndex = 10 * currentPageNumber;
+
+        for (let i = (startIndex - 1); i < endIndex; i++) {
+            const item = allData[i];
+            if (item) {
+                pagedData.push(item);
+            }
+        }
+
+        return pagedData;
+    }
 
     //view product detail
     const handleProductDetailView = async (id) => {
@@ -24,7 +47,7 @@ const ProductsTable = ({ data, setData }) => {
         }
     }
 
-    if (!data) return (
+    if (!data || !dataByPageNumber) return (
         <div>
             <h3>No Products</h3>
         </div>
@@ -44,7 +67,7 @@ const ProductsTable = ({ data, setData }) => {
         </thead>
         <tbody>
             {
-                data && data.map((item) => (
+                (data && dataByPageNumber) && dataByPageNumber.map((item) => (
                     <tr key={item._id}>
                         <td>{item._id}</td>
                         <td>{item.name}</td>

@@ -1,0 +1,18 @@
+.pagination_box {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination_box > * {
+    border: 1px solid black;
+    padding: 0px 10px;
+    background: none;
+}
+
+.pagination_box > button {
+    padding: 2px 10px;
+}

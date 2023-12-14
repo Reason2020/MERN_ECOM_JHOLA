@@ -39,7 +39,7 @@ const main = async () => {
             info(`Server listening at port ${PORT}`);
         });
     } catch (err) {
-        error(`Database connection failed`);
+        error(`Database connection failed: ${err}`);
     }
 }
 
